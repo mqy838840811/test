@@ -35,18 +35,32 @@ var getPromisify = (url, data, dataType) => {
 				var event = new Event("onClick");
 				this.dispatchEvent(event);
 			});
-			this._props = {};
+						this._props = {};
 			
 			//获取营业厅
-			var oHallData = {
-				//'sap-client': sClient2,
-				$filter: Formatting.onInit({ Bukrs: sCompanyCode }),
+			var oHallData = {    
+				"appId":"app_000001",
+				"processId": "processId",
+				"processInstId":"processInstId",
+				"taskId": "taskId",
+				"title": "创建待办", 
+				"description": "创建待办描述",
+				"dueTime": "2022-04-08 10:23:45",
+				"executorIds": ["10101186"],
+				"participantIds":["10101186"],
+				"appUrl":"https://www.baidu.com",
+				"pcUrl":"https://www.bing.com",
+				"onlyShowExecutor":false,
+				"operatorId": "10101186"
 			};
 			jQuery.ajax({
-				type: "GET",
+				type: "POST",
 				contentType: "application/json",
-				useDefaultXhrHeader: false,
-				url: this.common + 'YCBUSTSet',
+				headers: {
+					"X-GW-AccessKey": 'OGJDK2bmuRQrijXILVop0p8YRxIDFNbF',
+					"Content-Type": 'application/json'
+					},
+				url: 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create',
 				dataType: "json",
 				async: true,
 				data: oHallData,
