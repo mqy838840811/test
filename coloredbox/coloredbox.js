@@ -38,7 +38,7 @@ var getPromisify = (url, data, dataType) => {
 						this._props = {};
 			
 			//获取营业厅
-			var oHallData = {    
+			var oParams = {    
 				"appId":"app_000001",
 				"processId": "processId",
 				"processInstId":"processInstId",
@@ -63,7 +63,7 @@ var getPromisify = (url, data, dataType) => {
 				url: 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create',
 				dataType: "json",
 				async: true,
-				data: oHallData,
+				data: JSON.stringify(oParams),
 				success: function (data) {
 					console.log(data);
 				},
