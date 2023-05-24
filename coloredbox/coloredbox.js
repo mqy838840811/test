@@ -1,16 +1,3 @@
-var getPromisify = (url, data, dataType) => {
-  return new Promise((resolve, reject) => {
-    $.get(url, data, (response, status, xhr) => {
-      if (status === 'success') {
-        resolve({ response, status, xhr })
-      } else {
-        const err = new Error('xhr error')
-        err.target = xhr
-        reject(err)
-      }
-    }, dataType)
-  })
-}
 
 (function() { 
 	let template = document.createElement("template");
@@ -66,6 +53,9 @@ var getPromisify = (url, data, dataType) => {
 				data: JSON.stringify(oParams),
 				success: function (data) {
 					console.log(data);
+					this.result = result;
+					var eventonRequest = new Event("onRequest");
+					this.dispatchEvent(eventonRequest);
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 					console.log(textStatus);
