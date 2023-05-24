@@ -41,13 +41,13 @@ var getPromisify = (url, data, dataType) => {
 			var  email = "test@ptmind.com";  
 			console.log(1);  
 			jQuery.ajax({  
-				url: "https://stcard.ecej.com/encryption/app/getCityCode?companyCode=0011",  
+				url: "http://159.75.227.46:1161/produce/check/3045",  
 				type: "get",
 				async: true,   
 				success: function(data){  
 					console.log(2);  
 					var event = new Event("onRequest");
-					this.dispatchEvent(event);
+					this.dispatchEvent(event,data);
 				}  
 			});  
 			console.log(3);
