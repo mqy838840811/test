@@ -1,3 +1,17 @@
+var getPromisify = (url, data, dataType) => {
+  return new Promise((resolve, reject) => {
+    $.get(url, data, (response, status, xhr) => {
+      if (status === 'success') {
+        resolve({ response, status, xhr })
+      } else {
+        const err = new Error('xhr error')
+        err.target = xhr
+        reject(err)
+      }
+    }, dataType)
+  })
+}
+
 (function() { 
 	let template = document.createElement("template");
 	template.innerHTML = `
@@ -22,6 +36,22 @@
 				this.dispatchEvent(event);
 			});
 			this._props = {};
+			
+			// 异步  
+			var  email = "test@ptmind.com";  
+			console.log(1);  
+			jQuery.ajax({  
+				url: "https://stcard.ecej.com/encryption/app/getCityCode?companyCode=0011",  
+				type: "get",
+				async: true,   
+				success: function(data){  
+					console.log(2);  
+					var event = new Event("onRequest");
+					this.dispatchEvent(event);
+				}  
+			});  
+			console.log(3);
+			
 		}
 
 		onCustomWidgetBeforeUpdate(changedProperties) {
