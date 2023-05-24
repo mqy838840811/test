@@ -37,19 +37,26 @@ var getPromisify = (url, data, dataType) => {
 			});
 			this._props = {};
 			
-			// 异步  
-			var  email = "test@ptmind.com";  
-			console.log(1);  
-			jQuery.ajax({  
-				url: "http://159.75.227.46:1161/produce/check/3045",  
-				type: "get",
-				async: true,   
-				success: function(data){  
-					console.log(2);  
-					var event = new Event("onRequest");
-					this.dispatchEvent(event,data);
-				}  
-			});  
+			//获取营业厅
+			var oHallData = {
+				//'sap-client': sClient2,
+				$filter: Formatting.onInit({ Bukrs: sCompanyCode }),
+			};
+			jQuery.ajax({
+				type: "GET",
+				contentType: "application/json",
+				useDefaultXhrHeader: false,
+				url: this.common + 'YCBUSTSet',
+				dataType: "json",
+				async: true,
+				data: oHallData,
+				success: function (data) {
+					console.log(data);
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					console.log(textStatus);
+				},
+			});
 			console.log(3);
 			
 		}
