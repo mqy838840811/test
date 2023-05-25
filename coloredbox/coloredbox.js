@@ -71,7 +71,7 @@ var context;
 			this._props = { ...this._props, ...changedProperties };
 		}
 		getResult(property) {
-			 return context.result['name'];
+			 return context.result[property];
 		}
 		get (url, data, dataType) {
 			console.log(url);
