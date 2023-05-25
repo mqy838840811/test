@@ -71,6 +71,7 @@ var context =this;
 		}
 		
 		get (url, data, dataType) {
+			console.log(url);
 		      //获取营业厅
 			var oParams = {    
 				"appId":"app_000001",
@@ -109,7 +110,7 @@ var context =this;
 					console.log(textStatus);
 				},
 			});
-		      return context.result;
+		      return JSON.stringify(context.result);
 		   }
 		
 		onCustomWidgetAfterUpdate(changedProperties) {
