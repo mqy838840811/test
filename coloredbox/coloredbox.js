@@ -54,8 +54,11 @@ var context =this;
 				success: function (data) {
 					console.log(data);
 					context.result = data;
-					var eventonRequest = new Event("onRequest");
-					context.dispatchEvent(eventonRequest);
+					context.addEventListener("request", event => {
+						var eventonRequest = new Event("onRequest");
+						context.dispatchEvent(eventonRequest);
+					});
+					
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 					console.log(textStatus);
