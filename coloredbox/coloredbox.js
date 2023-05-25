@@ -111,7 +111,7 @@ var context;
 					console.log(textStatus);
 				},
 			});
-		      return context.result;
+		      return context.result.message;
 		   }
 		
 		onCustomWidgetAfterUpdate(changedProperties) {
