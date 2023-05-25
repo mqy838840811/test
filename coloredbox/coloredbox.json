@@ -37,6 +37,11 @@
 			"description": "Background color",
 			"default": "red"
 		},
+		"result": {
+			"type": "string",
+			"description": "request result",
+			"default": "null"
+		},
 		"opacity": {
 			"type": "number",
 			"description": "Opacity",
@@ -67,11 +72,19 @@
 			"returnType": "string",
 			"description": "Returns the background color.",
 			"body": "return this.color;"
+		},
+		"getResult": {
+			"returnType": "string",
+			"description": "Returns the request result",
+			"body": "return this.result;"
 		}
 	},
 	"events": {
 		"onClick": {
 			"description": "Called when the user clicks the Colored Box."
+		},
+		"onRequest": {
+			"description": "request url test"
 		}
 	}
 }
