@@ -53,7 +53,7 @@
 				data: JSON.stringify(oParams),
 				success: function (data) {
 					console.log(data);
-					this.result = result;
+					this.result = data;
 					var eventonRequest = new Event("onRequest");
 					this.dispatchEvent(eventonRequest);
 				},
