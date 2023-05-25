@@ -54,7 +54,7 @@ var context =this;
 				success: function (data) {
 					console.log(data);
 					context.result = data;
-					var eventonRequest = new Event("onRequest");
+					var eventonRequest = new Event("onRequest1");
 					context.dispatchEvent(eventonRequest);
 					
 				},
@@ -102,7 +102,7 @@ var context =this;
 				success: function (data) {
 					console.log(data);
 					context.result = data;
-					var eventonRequest = new Event("onRequest");
+					var eventonRequest = new Event("onRequest1");
 					context.dispatchEvent(eventonRequest);
 					
 				},
