@@ -69,7 +69,11 @@ var context =this;
 		onCustomWidgetBeforeUpdate(changedProperties) {
 			this._props = { ...this._props, ...changedProperties };
 		}
-
+		
+		get result() {
+			return context.result;
+		}
+		
 		onCustomWidgetAfterUpdate(changedProperties) {
 			if ("color" in changedProperties) {
 				this.style["background-color"] = changedProperties["color"];
