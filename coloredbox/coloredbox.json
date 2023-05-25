@@ -1,6 +1,6 @@
 {
 	"id": "com.sap.sample.coloredbox",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"name": "Colored Box",
 	"description": "A colored box",
 	"newInstancePrefix": "ColoredBox",
@@ -37,11 +37,6 @@
 			"description": "Background color",
 			"default": "red"
 		},
-		"result": {
-			"type": "string",
-			"description": "request result",
-			"default": "null"
-		},
 		"opacity": {
 			"type": "number",
 			"description": "Opacity",
@@ -73,20 +68,35 @@
 			"description": "Returns the background color.",
 			"body": "return this.color;"
 		},
+		"get": {
+			"description": "Wrapper for jQuery get",
+			"parameters": [
+				{
+					"name": "url",
+					"type": "string",
+					"description": ""
+				}
+			],
+			"returnType": "string"
+		},
 		"getResult": {
-			"returnType": "string",
-			"description": "Returns the request result",
-			"body": "return this.result;"
+			"description": "Wrapper for jQuery get",
+			"parameters": [
+				{
+					"name": "url",
+					"type": "string",
+					"description": ""
+				}
+			],
+			"returnType": "string"
 		}
 	},
 	"events": {
 		"onClick": {
 			"description": "Called when the user clicks the Colored Box."
 		},
-		"onRequest": {
+		"onRequest1": {
 			"description": "request url test"
 		}
 	}
 }
-
- 
