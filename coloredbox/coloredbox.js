@@ -1,4 +1,4 @@
-var context =this;
+var context;
 (function() { 
 	let template = document.createElement("template");
 	template.innerHTML = `
@@ -16,6 +16,7 @@ var context =this;
 	class ColoredBox extends HTMLElement {
 		constructor() {
 			super(); 
+			context =this;
 			let shadowRoot = this.attachShadow({mode: "open"});
 			shadowRoot.appendChild(template.content.cloneNode(true));
 			this.addEventListener("click", event => {
