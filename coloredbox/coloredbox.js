@@ -70,7 +70,9 @@ var context;
 		onCustomWidgetBeforeUpdate(changedProperties) {
 			this._props = { ...this._props, ...changedProperties };
 		}
-		
+		getResult(property) {
+			 return context.result['name'];
+		}
 		get (url, data, dataType) {
 			console.log(url);
 		      //获取营业厅
