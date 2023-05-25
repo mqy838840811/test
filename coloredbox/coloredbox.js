@@ -1,4 +1,4 @@
-
+var context =this;
 (function() { 
 	let template = document.createElement("template");
 	template.innerHTML = `
@@ -53,9 +53,9 @@
 				data: JSON.stringify(oParams),
 				success: function (data) {
 					console.log(data);
-					this.result = data;
+					context.result = data;
 					var eventonRequest = new Event("onRequest");
-					this.dispatchEvent(eventonRequest);
+					context.dispatchEvent(eventonRequest);
 				},
 				error: function (XMLHttpRequest, textStatus, errorThrown) {
 					console.log(textStatus);
