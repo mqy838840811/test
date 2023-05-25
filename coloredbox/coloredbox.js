@@ -111,7 +111,7 @@ var context;
 					console.log(textStatus);
 				},
 			});
-		      return JSON.stringify(context.result);
+		      return context.result;
 		   }
 		
 		onCustomWidgetAfterUpdate(changedProperties) {
