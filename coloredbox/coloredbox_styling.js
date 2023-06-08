@@ -35,6 +35,7 @@
 		}
 
 		set color(newColor) {
+			console.log('ColoredBoxStylingPanel setColor');
 			this._shadowRoot.getElementById("styling_color").value = newColor;
 		}
 
