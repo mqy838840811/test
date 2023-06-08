@@ -40,6 +40,7 @@
 		}
 
 		get color() {
+			console.log('ColoredBoxStylingPanel getColor');
 			return this._shadowRoot.getElementById("styling_color").value;
 		}
 	}
