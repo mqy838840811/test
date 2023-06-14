@@ -27,6 +27,7 @@ var context;
             });
             this._props = {};
 		this.params= {};
+		this.result= {};
 		this.params.icomeTodo = {};
         }
 
