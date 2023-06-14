@@ -1,7 +1,7 @@
 var context;
-(function() { 
-	let template = document.createElement("template");
-	template.innerHTML = `
+(function () {
+    let template = document.createElement("template");
+    template.innerHTML = `
 		<style>
 		:host {
 			border-radius: 25px;
@@ -13,78 +13,86 @@ var context;
 		</style> 
 	`;
 
-	class ColoredBox extends HTMLElement {
-		constructor() {
-			super(); 
-			context =this;
-			let shadowRoot = this.attachShadow({mode: "open"});
-			shadowRoot.appendChild(template.content.cloneNode(true));
-			this.addEventListener("click", event => {
-				var event = new Event("onClick");
-				this.dispatchEvent(event);
-			});
-			this._props = {};
-			
-		}
+    class ColoredBox extends HTMLElement {
+        constructor() {
+            super();
+            context = this;
+            let shadowRoot = this.attachShadow({
+                    mode: "open"
+                });
+            shadowRoot.appendChild(template.content.cloneNode(true));
+            this.addEventListener("click", event => {
+                var event = new Event("onClick");
+                this.dispatchEvent(event);
+            });
+            this._props = {};
+			this.params.icomeTodo = {};
+        }
 
-		onCustomWidgetBeforeUpdate(changedProperties) {
-			this._props = { ...this._props, ...changedProperties };
-		}
-		getResult(property) {
-			 return context.result[property];
-		}
-		get (url, data, dataType) {
-			console.log(url);
-		      //获取营业厅
-			var oParams = {    
-				"appId":"app_000001",
-				"processId": "processId",
-				"processInstId":"processInstId",
-				"taskId": "taskId",
-				"title": "创建待办", 
-				"description": "创建待办描述",
-				"dueTime": "2022-04-08 10:23:45",
-				"executorIds": ["10101186"],
-				"participantIds":["10101186"],
-				"appUrl":"https://www.baidu.com",
-				"pcUrl":"https://www.bing.com",
-				"onlyShowExecutor":false,
-				"operatorId": "10101186"
-			};
-			jQuery.ajax({
-				type: "POST",
-				contentType: "application/json",
-				headers: {
-					"X-GW-AccessKey": 'OGJDK2bmuRQrijXILVop0p8YRxIDFNbF',
-					"Content-Type": 'application/json'
-					},
-				url: 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create',
-				dataType: "json",
-				async: false,
-				data: JSON.stringify(oParams),
-				success: function (data) {
-					console.log(data);
-					context.result = data;
-					var eventonRequest = new Event("onRequest1");
-					context.dispatchEvent(eventonRequest);
-					
-				},
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					console.log(textStatus);
-				},
-			});
-		      return context.result.message;
-		   }
+        
+        
+        getParamsIcomeTodo(property) {
+            return this.params.icomeTodo[property];
+        }
+		setParamsIcomeTodo(paramsProperties) {
+            this.params.icomeTodo = {
+                ...this.params.icomeTodo,
+                ...paramsProperties
+            };
+        }
+		getResultIcomeTodo() {
+            return this.result.icomeTodo;
+        }
+        get(url) {
+			var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
+			if(url){
+				icomeTodoUrl = url;
+			}
+            console.log(url);
+            //获取营业厅
+            var oParams = this.params.icomeTodo;
+            jQuery.ajax({
+                type: "POST",
+                contentType: "application/json",
+                headers: {
+                    "X-GW-AccessKey": 'OGJDK2bmuRQrijXILVop0p8YRxIDFNbF',
+                    "Content-Type": 'application/json'
+                },
+                url: icomeTodoUrl,
+                dataType: "json",
+                async: false,
+                data: JSON.stringify(oParams),
+                success: function (data) {
+                    console.log(data);
+                    context.result = data;
+					this.result.icomeTodo = data;
+                    var eventOnRequestSuccess = new Event("onRequestSuccess");
+                    context.dispatchEvent(eventOnRequestSuccess,data);
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    var eventOnRequestError = new Event("onRequestError");
+                    context.dispatchEvent(eventOnRequestError,textStatus);
+                },
+            });
+        }
 		
-		onCustomWidgetAfterUpdate(changedProperties) {
-			if ("color" in changedProperties) {
-				this.style["background-color"] = changedProperties["color"];
-			}
-			if ("opacity" in changedProperties) {
-				this.style["opacity"] = changedProperties["opacity"];
-			}
-		}
-	}
+		
+		onCustomWidgetBeforeUpdate(changedProperties) {
+            this._props = {
+                ...this._props,
+                ...changedProperties
+            };
+        }
+        onCustomWidgetAfterUpdate(changedProperties) {
+            if ("color" in changedProperties) {
+                this.style["background-color"] = changedProperties["color"];
+            }
+            if ("opacity" in changedProperties) {
+                this.style["opacity"] = changedProperties["opacity"];
+            }
+        }
+    }
 
-	customElements.define("com-sap-sample-coloredbox", ColoredBox);
+    customElements.define("com-sap-sample-coloredbox", ColoredBox);
 })();
