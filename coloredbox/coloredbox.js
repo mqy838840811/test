@@ -26,6 +26,7 @@ var context;
                 this.dispatchEvent(event);
             });
             this._props = {};
+			this.params= {};
 			this.params.icomeTodo = {};
         }
 
