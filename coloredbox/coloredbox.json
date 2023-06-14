@@ -1,6 +1,6 @@
 {
 	"id": "com.sap.sample.coloredbox",
-	"version": "1.0.1",
+	"version": "1.0.4",
 	"name": "Colored Box",
 	"description": "A colored box",
 	"newInstancePrefix": "ColoredBox",
@@ -75,27 +75,55 @@
 					"name": "url",
 					"type": "string",
 					"description": ""
+				},
+				{
+					"name": "accessKey",
+					"type": "string",
+					"description": ""
 				}
-			],
-			"returnType": "string"
+			]
 		},
-		"getResult": {
+		"getParamsIcomeTodo": {
 			"description": "Wrapper for jQuery get",
 			"parameters": [
 				{
-					"name": "url",
+					"name": "paramsKey",
+					"type": "string",
+					"description": ""
+				}
+			]
+		},
+		"getResultIcomeTodo": {
+			"description": "Wrapper for jQuery get",
+			"parameters": [
+				{
+					"name": "resultKey",
 					"type": "string",
 					"description": ""
 				}
 			],
 			"returnType": "string"
+		},
+		"setParamsIcomeTodo": {
+			"description": "Wrapper for jQuery get",
+			"parameters": [
+				{
+					"name": "paramsKey",
+					"type": "string",
+					"description": ""
+				}
+			]
+
 		}
 	},
 	"events": {
 		"onClick": {
 			"description": "Called when the user clicks the Colored Box."
 		},
-		"onRequest1": {
+		"onRequestSuccess": {
+			"description": "request url test"
+		},
+		"onRequestError": {
 			"description": "request url test"
 		}
 	}
