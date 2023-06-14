@@ -74,12 +74,12 @@ var context;
                 success: function (data) {
 			context.result.icomeTodo = data;
                     var eventOnRequestSuccess = new Event("onRequestSuccess");
-                    context.dispatchEvent(eventOnRequestSuccess,data);
+                    context.dispatchEvent(eventOnRequestSuccess);
 
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     var eventOnRequestError = new Event("onRequestError");
-                    context.dispatchEvent(eventOnRequestError,textStatus);
+                    context.dispatchEvent(eventOnRequestError);
                 },
             });
         }
