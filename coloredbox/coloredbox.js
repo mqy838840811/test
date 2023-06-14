@@ -34,20 +34,20 @@ var context;
         getParamsIcomeTodo(property) {
             return this.params.icomeTodo[property];
         }
-		setParamsIcomeTodo(paramsProperties) {
+	setParamsIcomeTodo(paramsProperties) {
             this.params.icomeTodo = {
                 ...this.params.icomeTodo,
-                ...paramsProperties
+                ...JSON.stringify(paramsProperties)
             };
         }
-		getResultIcomeTodo() {
+	getResultIcomeTodo() {
             return this.result.icomeTodo;
         }
         get(url) {
-			var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
-			if(url){
-				icomeTodoUrl = url;
-			}
+		var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
+		if(url){
+			icomeTodoUrl = url;
+		}
             console.log(url);
             //获取营业厅
             var oParams = this.params.icomeTodo;
@@ -78,7 +78,7 @@ var context;
         }
 		
 		
-		onCustomWidgetBeforeUpdate(changedProperties) {
+	onCustomWidgetBeforeUpdate(changedProperties) {
             this._props = {
                 ...this._props,
                 ...changedProperties
