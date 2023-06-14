@@ -26,8 +26,8 @@ var context;
                 this.dispatchEvent(event);
             });
             this._props = {};
-			this.params= {};
-			this.params.icomeTodo = {};
+		this.params= {};
+		this.params.icomeTodo = {};
         }
 
         
@@ -38,13 +38,20 @@ var context;
 	setParamsIcomeTodo(paramsProperties) {
             this.params.icomeTodo = {
                 ...this.params.icomeTodo,
-                ...JSON.stringify(paramsProperties)
+                ...JSON.parse(paramsProperties)
             };
         }
-	getResultIcomeTodo() {
-            return this.result.icomeTodo;
+	getResultIcomeTodo(resultKey) {
+		var resultKeyValue;
+		if(resultKey){
+			resultKeyValue = this.result.icomeTodo[resultKey];
+		}
+		if(resultKeyValue){
+			return resultKeyValue;
+		}
+            return JSON.stringify(this.result.icomeTodo);
         }
-        get(url) {
+        get(url,accessKey) {
 		var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
 		if(url){
 			icomeTodoUrl = url;
@@ -56,7 +63,7 @@ var context;
                 type: "POST",
                 contentType: "application/json",
                 headers: {
-                    "X-GW-AccessKey": 'OGJDK2bmuRQrijXILVop0p8YRxIDFNbF',
+                    "X-GW-AccessKey": accessKey,
                     "Content-Type": 'application/json'
                 },
                 url: icomeTodoUrl,
