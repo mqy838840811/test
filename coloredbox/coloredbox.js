@@ -74,7 +74,7 @@ var context;
                 success: function (data) {
                     console.log(data);
                     context.result = data;
-					this.result.icomeTodo = data;
+			context.result.icomeTodo = data;
                     var eventOnRequestSuccess = new Event("onRequestSuccess");
                     context.dispatchEvent(eventOnRequestSuccess,data);
 
