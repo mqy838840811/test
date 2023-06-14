@@ -72,8 +72,6 @@ var context;
                 async: false,
                 data: JSON.stringify(oParams),
                 success: function (data) {
-                    console.log(data);
-                    context.result = data;
 			context.result.icomeTodo = data;
                     var eventOnRequestSuccess = new Event("onRequestSuccess");
                     context.dispatchEvent(eventOnRequestSuccess,data);
