@@ -52,7 +52,7 @@ var context;
 		}
             return JSON.stringify(this.result.icomeTodo);
         }
-        get(url,accessKey) {
+        doPost(url,accessKey) {
 		var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
 		if(url){
 			icomeTodoUrl = url;
@@ -72,16 +72,19 @@ var context;
                 async: false,
                 data: JSON.stringify(oParams),
                 success: function (data) {
-			context.result.icomeTodo = data;
+					context.result.icomeTodo = data;
                     var eventOnRequestSuccess = new Event("onRequestSuccess");
                     context.dispatchEvent(eventOnRequestSuccess);
-
+					
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+					context.result.icomeTodo = {};
+					context.result.icomeTodo.code = -1;
                     var eventOnRequestError = new Event("onRequestError");
                     context.dispatchEvent(eventOnRequestError);
                 },
             });
+			return context.result.icomeTodo.code;
         }
 		
 		
