@@ -72,12 +72,14 @@ var context;
                 async: false,
                 data: JSON.stringify(oParams),
                 success: function (data) {
+			console.log(data);
 					context.result.icomeTodo = data;
                     var eventOnRequestSuccess = new Event("onRequestSuccess");
                     context.dispatchEvent(eventOnRequestSuccess);
 					
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+			console.log('error:'+textStatus);
 					context.result.icomeTodo = {};
 					context.result.icomeTodo.code = -1;
                     var eventOnRequestError = new Event("onRequestError");
