@@ -52,6 +52,16 @@ var context;
 		}
             return JSON.stringify(this.result.icomeTodo);
         }
+	getHttpResult(resultKey) {
+		var resultKeyValue;
+		if(resultKey){
+			resultKeyValue = this.result[resultKey];
+		}
+		if(resultKeyValue){
+			return resultKeyValue;
+		}
+            return JSON.stringify(this.result);
+        }
         doPost(url,accessKey) {
 		var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
 		if(url){
