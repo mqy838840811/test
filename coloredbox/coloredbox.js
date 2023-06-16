@@ -44,49 +44,53 @@ var context;
         }
 	getResultIcomeTodo(resultKey) {
 		var resultKeyValue;
-		if(resultKey){
+		if(!resultKey||resultKeyValue == ""){
+			return JSON.stringify(this.result.icomeTodo);
+		}
+		if(resultKey.indexOf('.')!=-1){
+			resultKeyValue =this.result.icomeTodo[resultKey.split('.')[0]][resultKey.split('.')[1]]
+		}else{
 			resultKeyValue = this.result.icomeTodo[resultKey];
 		}
-		if(resultKeyValue){
-			return resultKeyValue;
-		}
-            return JSON.stringify(this.result.icomeTodo);
+		return resultKeyValue;
         }
 	getHttpResult(resultKey) {
 		var resultKeyValue;
-		if(resultKey){
+		if(!resultKey||resultKeyValue == ""){
+			return JSON.stringify(this.result);
+		}
+		if(resultKey.indexOf('.')!=-1){
+			resultKeyValue =this.result[resultKey.split('.')[0]][resultKey.split('.')[1]]
+		}else{
 			resultKeyValue = this.result[resultKey];
 		}
-		if(resultKeyValue){
-			return resultKeyValue;
-		}
-            return JSON.stringify(this.result);
+		return resultKeyValue;
         }
-		doGet(url,accessKey) {
-			jQuery.ajax({
-                type: "GET",
-                contentType: "application/json",
-                headers: {
-                    "X-GW-AccessKey": accessKey,
-                    "Content-Type": 'application/json'
-                },
-                url: url,
-                dataType: "json",
-                async: false,
-                success: function (data) {
-					console.log(data);
-					context.result = data;
-                    var eventOnRequestSuccess = new Event("onRequestSuccess");
-                    context.dispatchEvent(eventOnRequestSuccess);
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-					console.log('error:'+textStatus);
-					context.result.code = -1;
-                    var eventOnRequestError = new Event("onRequestError");
-                    context.dispatchEvent(eventOnRequestError);
-                },
-            });
-			return context.result.code;
+	doGet(url,accessKey) {
+		jQuery.ajax({
+			type: "GET",
+			contentType: "application/json",
+			headers: {
+			    "X-GW-AccessKey": accessKey,
+			    "Content-Type": 'application/json'
+			},
+			url: url,
+			dataType: "json",
+			async: false,
+			success: function (data) {
+						console.log(data);
+						context.result = data;
+			    var eventOnRequestSuccess = new Event("onRequestSuccess");
+			    context.dispatchEvent(eventOnRequestSuccess);
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+						console.log('error:'+textStatus);
+						context.result.code = -1;
+			    var eventOnRequestError = new Event("onRequestError");
+			    context.dispatchEvent(eventOnRequestError);
+			},
+            	});
+		return context.result.code;
         }
         doPost(url,accessKey) {
 		var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
