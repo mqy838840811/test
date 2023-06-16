@@ -62,6 +62,32 @@ var context;
 		}
             return JSON.stringify(this.result);
         }
+		doGet(url,accessKey) {
+			jQuery.ajax({
+                type: "GET",
+                contentType: "application/json",
+                headers: {
+                    "X-GW-AccessKey": accessKey,
+                    "Content-Type": 'application/json'
+                },
+                url: url,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+					console.log(data);
+					context.result = data;
+                    var eventOnRequestSuccess = new Event("onRequestSuccess");
+                    context.dispatchEvent(eventOnRequestSuccess);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+					console.log('error:'+textStatus);
+					context.result.code = -1;
+                    var eventOnRequestError = new Event("onRequestError");
+                    context.dispatchEvent(eventOnRequestError);
+                },
+            });
+			return context.result.code;
+        }
         doPost(url,accessKey) {
 		var icomeTodoUrl = 'https://rdfa-gateway.uat.ennew.com/icome-contact/todo/create';
 		if(url){
